@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/sunsun_forecast/version', __FILE__)
+require File.expand_path('../lib/sunsun/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Wataru MIYAGUNI"]
@@ -11,9 +11,9 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "sunsun_forecast"
+  gem.name          = "sunsun"
   gem.require_paths = ["lib"]
-  gem.version       = SunsunForecast::VERSION
+  gem.version       = Sunsun::VERSION
 
   gem.add_runtime_dependency 'sinatra'
   gem.add_runtime_dependency 'sequel'

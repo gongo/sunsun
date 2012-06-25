@@ -1,13 +1,13 @@
 require 'sequel'
 
-module SunsunForecast
+module Sunsun
   private
 
   #
-  # SunsunForecast.DB         # => "db/development.sqlite3"
+  # Sunsun::DB         # => "db/development.sqlite3"
   #
   # ENV['SUNSUN_ENV'] = 'production'
-  # SunsunForecast.DB         # => "db/production.sqlite3"
+  # Sunsun::DB         # => "db/production.sqlite3"
   #
   def self.db_schema
     env = ENV['SUNSUN_ENV'] || "development"

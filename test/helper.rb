@@ -12,10 +12,10 @@ require 'sequel'
 require 'sequel/extensions/migration'
 require 'active_support/core_ext/array/extract_options'
 require 'fabrication'
-require 'sunsun_forecast'
+require 'sunsun'
 
-Sequel::Migrator.apply(SunsunForecast::DB, "db/migrate", 0)
-Sequel::Migrator.apply(SunsunForecast::DB, "db/migrate")
+Sequel::Migrator.apply(Sunsun::DB, "db/migrate", 0)
+Sequel::Migrator.apply(Sunsun::DB, "db/migrate")
 
 class Test::Unit::TestCase
   def run(*args, &block)
@@ -24,5 +24,5 @@ class Test::Unit::TestCase
 end
 
 %w(カレー ラーメン 和食 洋食 中華).each do |gname|
-  SunsunForecast::DB[:genres].insert :name => gname
+  Sunsun::DB[:genres].insert :name => gname
 end

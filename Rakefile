@@ -2,18 +2,18 @@
 require "bundler/gem_tasks"
 
 namespace :db do
-  require_relative 'lib/sunsun_forecast/db.rb'
+  require_relative 'lib/sunsun/db.rb'
   require 'sequel/extensions/migration'
 
   desc "Run database migrations"
   task :migrate do
-    Sequel::Migrator.apply(SunsunForecast::DB, 'db/migrate')
+    Sequel::Migrator.apply(Sunsun::DB, 'db/migrate')
   end
 
   desc "Rollback the database"
   task :rollback do
-    version = (row = SunsunForecast::DB[:schema_info].first) ? row[:version] : nil
-    Sequel::Migrator.apply(SunsunForecast::DB, "db/migrate", version - 1)
+    version = (row = Sunsun::DB[:schema_info].first) ? row[:version] : nil
+    Sequel::Migrator.apply(Sunsun::DB, "db/migrate", version - 1)
   end
 end
 
@@ -30,7 +30,7 @@ namespace :test do
   desc "Start console"
   task :console do
     ENV['SUNSUN_ENV'] = 'test'
-    require_relative 'lib/sunsun_forecast'
+    require_relative 'lib/sunsun'
     require 'pry'
     Pry.start
   end

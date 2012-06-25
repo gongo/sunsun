@@ -30,7 +30,7 @@ class MenusDay < Sequel::Model
   # @param [symbol] day_sym 曜日 (:sunday, :monday, :tuesday, :wednesday,:thursday, :friday, :saturday)
   #
   def self.menu_ranking(day_sym)
-    day = SunsunForecast::DAYS_INTO_WEEK[day_sym.to_sym]
+    day = Sunsun::DAYS_INTO_WEEK[day_sym.to_sym]
     count = filter(:day => day).count.to_f
 
     with_sql(<<-EOS).all
@@ -63,7 +63,7 @@ class MenusDay < Sequel::Model
   # @param [symbol] day_sym 曜日 (:sunday, :monday, :tuesday, :wednesday,:thursday, :friday, :saturday)
   #
   def self.genre_ranking(day_sym)
-    day = SunsunForecast::DAYS_INTO_WEEK[day_sym.to_sym]
+    day = Sunsun::DAYS_INTO_WEEK[day_sym.to_sym]
     count = filter(:day => day).count.to_f
 
     with_sql(<<-EOS).all
