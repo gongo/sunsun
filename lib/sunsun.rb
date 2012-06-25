@@ -1,6 +1,5 @@
 require 'sunsun/db'
 require 'sunsun/version'
-require 'sunsun/markov'
 
 module Sunsun
   require 'sunsun/models/ranking'
