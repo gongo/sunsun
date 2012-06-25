@@ -1,0 +1,6 @@
+language: ruby
+before_script: "SUNSUN_ENV=\"test\" bundle exec rake db:migrate"
+script: "bundle exec rake test"
+rvm:
+  - 1.9.2
+  - 1.9.3
