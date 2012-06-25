@@ -31,11 +31,10 @@ Rake::TestTask.new do |t|
 end
 
 namespace :test do
-  require 'active_support/core_ext/array/extract_options'
-  require 'fabrication'
-
   desc "Start console"
   task :console do
+    require 'active_support/core_ext/array/extract_options'
+    require 'fabrication'
     ENV['SUNSUN_ENV'] = 'test'
     require_relative 'lib/sunsun'
     require 'pry'
