@@ -15,6 +15,13 @@ namespace :db do
     version = (row = Sunsun::DB[:schema_info].first) ? row[:version] : nil
     Sequel::Migrator.apply(Sunsun::DB, "db/migrate", version - 1)
   end
+
+  desc "Load the seed data from db/seed.rb"
+  task :seed do
+    Sequel::Migrator.apply(Sunsun::DB, "db/migrate", 0)
+    Sequel::Migrator.apply(Sunsun::DB, "db/migrate")
+    require_relative 'db/seed'
+  end
 end
 
 require 'rake/testtask'
