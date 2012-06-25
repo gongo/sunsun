@@ -5,7 +5,7 @@
 
 ## Requirements
 
-- Ruby 1.9.3+
+- Ruby 1.9.2+, 1.9.3+
 - Rack ServerSinatra 1.3.2+
 - ORM
     - Sequel
@@ -28,7 +28,7 @@ Create the database structure.
     $ SUNSUN_ENV="production" bundle exec rake db:migrate # To "db/production.sqlite3"
     $ SUNSUN_ENV="test" bundle exec rake db:migrate       # To "db/test.sqlite3"
 
-Load the seed data. (Default: "development" environment)
+Load the [seed data](https://github.com/gongo/sunsun/wiki/Demo-Data). (Default: "development" environment)
 
     $ bundle exec rake db:seed
 
