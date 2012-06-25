@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>さんさん</title>
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/vendor/jqplot/excanvas.js"></script><![endif]-->
+    <script type="text/javascript" src="/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendor/jqplot/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="/vendor/jqplot/plugins/jqplot.barRenderer.min.js"></script>
+    <script type="text/javascript" src="/vendor/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="/vendor/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+    <script type="text/javascript" src="/vendor/kickstart/prettify.js"></script>
+    <script type="text/javascript" src="/vendor/kickstart/kickstart.js"></script>
+    <link rel="stylesheet" type="text/css" href="/vendor/jqplot/jquery.jqplot.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/kickstart/kickstart.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/style.css" media="all">
+
+    <script type="text/javascript">
+      $(function() {
+          var current = $('nav > ul.menu li a[href="<%= request.path_info %>"]');
+          current.parent().addClass("current");
+          $('title').text(current.text());
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <ul class="menu">
+          <li><a href="/days">曜日情報</a></li>
+          <li><a href="/genres">ジャンル情報</a></li>
+        </ul>
+      </nav>
+    </header>
+    <article>
+
+    <%= yield %>
+
+    </article>
+  </body>
+</html>

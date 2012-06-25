@@ -1,0 +1,121 @@
+<script type="text/javascript">
+  var loadIndicateChart = {
+      show: true,
+      indicator: 'Loading...',
+      axes: {
+          xaxis: { tickOptions: { show: false } },
+          yaxis: { tickOptions: { show: false } }
+      }
+  };
+
+  var noDataChart = {
+      show: true,
+      indicator: 'No Data...',
+      axes: {
+          xaxis: { tickOptions: { show: false } },
+          yaxis: { tickOptions: { show: false } }
+      }
+  };
+
+
+  function getGenreEncounter(id, name) {
+      $('#information-title').text(name + " information");
+
+      $('#chain_chart').empty();
+      $('#encounter_chart').empty();
+      $.jqplot('chain_chart', [], {noDataIndicator:loadIndicateChart});
+      $.jqplot('encounter_chart', [], {noDataIndicator:loadIndicateChart});
+
+      $.getJSON('/genres/' + id + '/encounter', null, function(json, status) {
+          $.jqplot('encounter_chart', [json], {
+              title: "曜日毎の出現確率",
+              seriesDefaults: {
+                  renderer: $.jqplot.BarRenderer,
+                  pointLabels: {
+                      show: true,
+                      location: 'n',
+                      escapeHTML: false,
+                      edgeTolerance: -20,
+                      ypadding: 10,
+                      formatString: '<em>%d %%</em>'
+                  }
+              },
+
+              axes: {
+                  xaxis: {
+                      renderer: $.jqplot.CategoryAxisRenderer,
+                  },
+                  yaxis: {
+                      min: 0,
+                      max: 100,
+                      tickInterval: 20,
+                  }
+              }
+          }).redraw();
+      });
+
+      $.getJSON('/genres/' + id + '/chain', null, function(json) {
+          $.jqplot('chain_chart', [json], {
+              title: "次に出るジャンルの出現確率",
+              seriesDefaults: {
+                  renderer: $.jqplot.BarRenderer,
+                  shadowAngle: 135,
+                  rendererOptions: {
+                      barDirection: 'horizontal'
+                  },
+                  pointLabels: {
+                      show: true,
+                      location: 'e',
+                      edgeTolerance: -20,
+                      formatString: '%d %%'
+                  }
+              },
+
+              axes: {
+                  xaxis: {
+                      min: 0,
+                      max: 100,
+                      tickInterval: 20
+                  },
+                  yaxis: {
+                      renderer: $.jqplot.CategoryAxisRenderer,
+                  }
+              },
+
+              noDataIndicator: noDataChart
+          }).redraw();
+      });
+  }
+
+  <% if @genres.count > 0 %>
+  $(function() {
+      getGenreEncounter(<%= @genres.first.id %>, '<%= @genres.first.name %>');
+  });
+  <% end %>
+</script>
+
+<div id="wrap" class="clearfix">
+  <div class="col_12">
+    <div class="col_3 column">
+      <article>
+        <span class="icon x-large darkgray" data-icon="M"></span>
+        <span>Genres</span>
+        <hr>
+        <ul class="alt">
+          <% for g in @genres %>
+          <li><a href="#" onclick="getGenreEncounter(<%= g.id %>, '<%= g.name %>');"><%= g.name %></a></li>
+          <% end %>
+        </ul>
+      </article>
+    </div>
+
+    <div class="col_9 column">
+      <span class="icon x-large darkgray" data-icon="k"></span>
+      <span id="information-title">Genre Information</span>
+      <hr>
+      <div id="encounter_chart"></div>
+      <hr>
+      <div id="chain_chart"></div>
+    </div>
+  </div>
+</div>

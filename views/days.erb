@@ -1,0 +1,59 @@
+<script type="text/javascript">
+  $(function() {
+      var dayPlot = function(day) {
+          return $.getJSON("/days/" + day, function(json) {
+              var id = 'chart_' + day;
+
+              $("#" + id).show();
+              $.jqplot(id, [json], {
+                  seriesDefaults: {
+                      renderer: $.jqplot.BarRenderer,
+                      pointLabels: {
+                          show: true,
+                          location: "n",
+                          escapeHTML: false,
+                          edgeTolerance: -20,
+                          ypadding: 10,
+                          formatString: "<em>%d %%</em>"
+                      }
+                  },
+                  axes: {
+                      xaxis: {
+                          renderer: $.jqplot.CategoryAxisRenderer
+                      },
+                      yaxis: {
+                          label: "%"
+                      }
+                  }
+              });
+
+              if (! $('ul.tabs a[href="#' + id + '"]').parent().hasClass("current")) {
+                  $("#" + id).hide();
+              }
+          });
+      };
+
+      dayPlot("monday");
+      dayPlot("tuesday");
+      dayPlot("wednesday");
+      dayPlot("thursday");
+      dayPlot("friday");
+  });
+</script>
+
+<span class="icon x-large darkgray" data-icon="j"></span>
+<span>day ranking</span>
+
+<ul class="tabs center">
+  <li><a href="#chart_monday">Monday</a></li>
+  <li><a href="#chart_tuesday">Tuesday</a></li>
+  <li><a href="#chart_wednesday">Wednesday</a></li>
+  <li><a href="#chart_thursday">Thursday</a></li>
+  <li><a href="#chart_friday">Friday</a></li>
+</ul>
+
+<div id="chart_monday" class="tab-content"></div>
+<div id="chart_tuesday" class="tab-content"></div>
+<div id="chart_wednesday" class="tab-content"></div>
+<div id="chart_thursday" class="tab-content"></div>
+<div id="chart_friday" class="tab-content"></div>
