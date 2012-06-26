@@ -18,7 +18,7 @@ Sunsun used bundler
 
     $ gem install bundler
 
-Install required by Sunsun.
+Install gems required by Sunsun.
 
     $ bundle install --without development test
 
@@ -28,9 +28,9 @@ Create the database structure.
     $ SUNSUN_ENV="production" bundle exec rake db:migrate # To "db/production.sqlite3"
     $ SUNSUN_ENV="test" bundle exec rake db:migrate       # To "db/test.sqlite3"
 
-Load the [seed data](https://github.com/gongo/sunsun/wiki/Demo-Data). (Default: "development" environment)
+Load the [fixtures](https://github.com/gongo/sunsun/wiki/Demo-Data). (Default: "development" environment)
 
-    $ bundle exec rake db:seed
+    $ bundle exec rake db:fixtures
 
 Running web server. (Default: "development" environment)
 

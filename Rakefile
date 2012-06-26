@@ -16,11 +16,11 @@ namespace :db do
     Sequel::Migrator.apply(Sunsun::DB, "db/migrate", version - 1)
   end
 
-  desc "Load the seed data from db/seed.rb"
-  task :seed do
+  desc "Load the fixtures from db/demo_fixtures.rb"
+  task :fixtures do
     Sequel::Migrator.apply(Sunsun::DB, "db/migrate", 0)
     Sequel::Migrator.apply(Sunsun::DB, "db/migrate")
-    require_relative 'db/seed'
+    require_relative 'db/demo_fixtures'
   end
 end
 
